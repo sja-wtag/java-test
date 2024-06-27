@@ -1,17 +1,38 @@
-
-
 public class UploaderService<T extends Uploadable> {
-    T uploadableObject;
+    private static UploaderService<?> instance;
+    private T uploadableObject;
 
-    void setObject(T t){
+
+    private UploaderService() {
+
+    }
+
+
+    public static synchronized UploaderService<?> getInstance() {
+        if (instance == null) {
+            instance = new UploaderService<>();
+        }
+        return instance;
+    }
+
+
+    public void setObject(T t) {
         this.uploadableObject = t;
     }
 
-    public void processFile(){
-        System.out.println("Processing " + uploadableObject.getName());
+    public void processFile() {
+        if (uploadableObject != null) {
+            System.out.println("Processing " + uploadableObject.getName());
+        } else {
+            System.out.println("No object set for processing.");
+        }
     }
 
-    public void uploadFile(){
-        System.out.println("Uploading " + uploadableObject.getName());
+    public void uploadFile() {
+        if (uploadableObject != null) {
+            System.out.println("Uploading " + uploadableObject.getName());
+        } else {
+            System.out.println("No object set for uploading.");
+        }
     }
 }
