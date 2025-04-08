@@ -7,4 +7,8 @@ public class File implements  Uploadable{
     public String getName() {
         return this.fileName;
     }
+
+    public String test() {
+    return "test";
+  }
 }
